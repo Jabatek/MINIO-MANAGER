@@ -6,8 +6,8 @@
     ></MDBNavbarToggler>
     <MDBCollapse v-model="collapse1" id="navbarSupportedContent">
       <MDBNavbarNav class="mb-2 mb-lg-0">
-        <MDBNavbarItem to="documents"> Documents </MDBNavbarItem>
-        <MDBNavbarItem to="/setting"> Setting </MDBNavbarItem>
+        <MDBNavbarItem v-if="state.username" to="documents"> Documents </MDBNavbarItem>
+        <MDBNavbarItem v-if="state.username=='admin'" to="/setting"> Setting </MDBNavbarItem>
       </MDBNavbarNav>
     </MDBCollapse>
   </MDBNavbar>
@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      username: store.state.username,
+      state: store.state,
     };
   },
   setup() {
