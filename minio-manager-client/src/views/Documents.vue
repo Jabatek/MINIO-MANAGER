@@ -1,33 +1,50 @@
 <template>
   <div class="Documents">
-    <h1>Documents</h1>
-    <fieldset>
-      <div id="uploder">
-        <input type="file" v-on:change="handleFileSelect($event)" />
-        <button v-on:click="upload()">Upload</button>
-      </div>
-    </fieldset>
+    <h2 class="mt-5">Documents</h2>
 
-    <div id="documents">
-      <div
-        class="doc"
+    <MDBFile v-on:change="handleFileSelect($event)" />
+    <MDBBtn v-on:click="upload()" color="primary" block class="mb-4"
+      >Upload</MDBBtn
+    >
+
+    <MDBContainer class="d-flex flex-wrap">
+      <MDBCard
         v-for="(file, index) in files"
         :key="index"
         v-on:click="getDocument(file)"
       >
-        <img :src="file?.path" alt="" />
-        <strong>{{ file.name }}</strong>
-      </div>
-    </div>
+        <MDBCardImg :src="file?.path" top alt="..." />
+        <MDBCardBody>
+          <MDBCardTitle>{{ file.name }}</MDBCardTitle>
+        </MDBCardBody>
+      </MDBCard>
+    </MDBContainer>
   </div>
 </template>
 <script>
 import store from "../store";
 import axios from "axios";
+import {
+  MDBContainer,
+  MDBFile,
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardImg,
+} from "mdb-vue-ui-kit";
 
 export default {
   name: "documents",
-  components: {},
+  components: {
+    MDBContainer,
+    MDBFile,
+    MDBBtn,
+    MDBCard,
+    MDBCardBody,
+    MDBCardTitle,
+    MDBCardImg,
+  },
   data() {
     return {
       files: [],
@@ -98,17 +115,15 @@ export default {
 </script>
 
 <style scoped>
-.doc img {
-  width: 100px;
-}
-fieldset {
-  margin: 10px 100px;
-}
-.doc {
-  display: inline-grid;
-  margin: 10px;
-  padding: 10px;
+.card {
   cursor: pointer;
+  width: 130px;
+  margin: 10px;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  padding: 0.2rem 0.2rem;
 }
 </style>
 >

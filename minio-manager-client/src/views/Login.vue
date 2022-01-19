@@ -1,28 +1,47 @@
 <template>
   <div class="login">
-    <h1>Login</h1>
-    <fieldset>
-      <label for="username">User Name</label>
-      <input id="username" v-model="username" type="text" name="username" />
-      <br />
-      <label for="password">Password</label>
-      <input id="password" v-model="password" type="text" name="password" />
-      <br />
-      <button v-on:click="login()">Login</button>
-    </fieldset>
-    <h4>User : user | password: user</h4>
-    <h4>Supe User: admin | password: admin</h4>
-    <h3 id="message">{{ message }}</h3>
+    <h2 class="mt-5">Login</h2>
+
+    <MDBRow center class="d-flex">
+      <MDBCol md="6">
+        <MDBInput
+          type="text"
+          label="Username"
+          id="username"
+          v-model="username"
+          wrapperClass="mb-4"
+        />
+
+        <MDBInput
+          type="password"
+          label="Password"
+          id="password"
+          v-model="password"
+          wrapperClass="mb-4"
+        />
+
+        <MDBBtn v-on:click="login()" color="primary" block class="mb-4"
+          >Login</MDBBtn
+        >
+
+        <h3 id="message">{{ message }}</h3>
+      </MDBCol>
+    </MDBRow>
+
+    <strong>User : </strong> user | password: user
+    <br />
+    <strong>Supe User: </strong> admin | password: admin
   </div>
 </template>
 <script>
 import router from "@/router";
 import store from "../store";
+import { MDBCol, MDBRow, MDBBtn, MDBInput } from "mdb-vue-ui-kit";
 store.commit("initPublicSetting");
 
 export default {
   name: "Login",
-  components: {},
+  components: { MDBCol, MDBRow, MDBBtn, MDBInput },
   data() {
     return {
       username: "admin",
