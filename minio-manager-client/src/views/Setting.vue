@@ -77,7 +77,7 @@ export default {
   async mounted() {
     this.setting = await axios
       .get(`${store.state.serverEndpoint}/setting`)
-      .then((res) => (!res.data || res.data == "" ? {} : res.data));
+      .then((res) => (!res.data || res.data == "") ? {} : res.data);
   },
 };
 </script>
