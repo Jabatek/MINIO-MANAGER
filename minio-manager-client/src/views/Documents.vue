@@ -114,13 +114,22 @@ export default {
 };
 </script>
 
-<style scoped>
+<style >
 .card {
   cursor: pointer;
-  width: 130px;
+  width: 110px;
   margin: 10px;
+  text-align: center;
 }
 
+.card-title {
+    margin-bottom: 0.2rem;
+    font-size: 12px;
+    margin-top: 0.2rem;;
+}
+.card-img-top {
+height: 120px;
+}
 .card-body {
   flex: 1 1 auto;
   padding: 0.2rem 0.2rem;
