@@ -4,6 +4,6 @@ WORKDIR /app
 COPY package.json /app
 RUN npm install
 COPY . /app
-CMD ["VUE_APP_SERVER_ENDPOINT=http://17.30.0.30:3000","npm", "run", "serve"]
+CMD ["VUE_APP_SERVER_ENDPOINT=http://192.168.2.30:3000","npm", "run", "serve"]
 
 
