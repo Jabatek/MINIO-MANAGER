@@ -59,7 +59,8 @@ export default {
     async upload() {
       const data = await axios
         .get(
-          `${store.state.serverEndpoint}/presignedPostObject/${this.file.name}`
+          `${store.state.serverEndpoint}/presignedPostObject/${this.file.name}`,
+          { headers: store.state.authHeader }
         )
         .then((res) => res.data);
 
@@ -93,17 +94,20 @@ export default {
     },
     async getDocuments() {
       const presignedUrl = await axios
-        .get(`${store.state.serverEndpoint}/presignedGetObjects`)
+        .get(`${store.state.serverEndpoint}/presignedGetObjects`, {
+          headers: store.state.authHeader,
+        })
         .then((res) => res.data);
-      const xmlData = await axios.get(presignedUrl).then((res) => res.data);
+      const xmlData = await axios.get(presignedUrl).then((res1) => res1.data);
       this.files = this.xml2Json(xmlData);
     },
     async getDocument(fileName) {
-      const presignedUrl = await axios
+       await axios
         .get(
           `${
             store.state.serverEndpoint
-          }/presignedGetObject/${fileName.name.replace("-thumbnail.jpg", "")}`
+          }/presignedGetObject/${fileName.name.replace("-thumbnail.jpg", "")}`,
+          { headers: store.state.authHeader }
         )
         .then((res) => window.open(res.data, "_blank").focus());
     },
@@ -114,7 +118,7 @@ export default {
 };
 </script>
 
-<style >
+<style>
 .card {
   cursor: pointer;
   width: 110px;
@@ -123,12 +127,12 @@ export default {
 }
 
 .card-title {
-    margin-bottom: 0.2rem;
-    font-size: 12px;
-    margin-top: 0.2rem;;
+  margin-bottom: 0.2rem;
+  font-size: 12px;
+  margin-top: 0.2rem;
 }
 .card-img-top {
-height: 120px;
+  height: 120px;
 }
 .card-body {
   flex: 1 1 auto;

@@ -74,7 +74,9 @@ export default {
   },
   methods: {
     async save() {
-      await axios.post(`${store.state.serverEndpoint}/setting`, this.setting);
+      await axios.post(`${store.state.serverEndpoint}/setting`, this.setting, {
+        headers: store.state.authHeader,
+      });
       setTimeout(() => {
         store.commit("initPublicSetting");
       }, 2000);
@@ -82,7 +84,9 @@ export default {
   },
   async mounted() {
     this.setting = await axios
-      .get(`${store.state.serverEndpoint}/setting`)
+      .get(`${store.state.serverEndpoint}/setting`, {
+        headers: store.state.authHeader,
+      })
       .then((res) => (!res.data || res.data == "" ? {} : res.data));
   },
 };

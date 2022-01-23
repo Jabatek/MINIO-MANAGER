@@ -1,14 +1,24 @@
 <template>
-  <MDBNavbar expand="lg" light bg="light" container>
+  <MDBNavbar v-if="state.user?.username" expand="lg" light bg="light" container>
     <MDBNavbarToggler
       @click="collapse1 = !collapse1"
       target="#navbarSupportedContent"
     ></MDBNavbarToggler>
     <MDBCollapse v-model="collapse1" id="navbarSupportedContent">
       <MDBNavbarNav class="mb-2 mb-lg-0">
-        <MDBNavbarItem v-if="state.username" to="documents"> Documents </MDBNavbarItem>
-        <MDBNavbarItem v-if="state.username=='admin'" to="/setting"> Setting </MDBNavbarItem>
+        <MDBNavbarItem to="/"> Home </MDBNavbarItem>
+        <MDBNavbarItem v-if="state.user?.role == 'admin'" to="/setting">
+          Setting
+        </MDBNavbarItem>
       </MDBNavbarNav>
+      <MDBBtn
+        v-on:click="logout()"
+        color="warning"
+        type="button"
+        class="btn btn-link px-3 me-2"
+      >
+        logout
+      </MDBBtn>
     </MDBCollapse>
   </MDBNavbar>
   <router-view class="container mt-5 px-lg-5" />
@@ -17,6 +27,7 @@
 import store from "./store";
 import { ref } from "vue";
 import {
+  MDBBtn,
   MDBNavbar,
   MDBCollapse,
   MDBNavbarToggler,
@@ -27,6 +38,7 @@ import {
 export default {
   name: "Setting",
   components: {
+    MDBBtn,
     MDBNavbar,
     MDBCollapse,
     MDBNavbarToggler,
@@ -38,7 +50,14 @@ export default {
       state: store.state,
     };
   },
+  methods: {
+    logout() {
+      store.dispatch("logout");
+    },
+  },
   setup() {
+    store.dispatch("auth");
+    store.commit("initPublicSetting");
     const collapse1 = ref(false);
     const dropdown1 = ref(false);
     return {

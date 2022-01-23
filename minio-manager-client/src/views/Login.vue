@@ -23,7 +23,6 @@
         <MDBBtn v-on:click="login()" color="primary" block class="mb-4"
           >Login</MDBBtn
         >
-
         <h3 id="message">{{ message }}</h3>
       </MDBCol>
     </MDBRow>
@@ -34,37 +33,37 @@
   </div>
 </template>
 <script>
-import router from "@/router";
+import axios from "axios";
 import store from "../store";
 import { MDBCol, MDBRow, MDBBtn, MDBInput } from "mdb-vue-ui-kit";
-store.commit("initPublicSetting");
 
 export default {
   name: "Login",
   components: { MDBCol, MDBRow, MDBBtn, MDBInput },
   data() {
     return {
-      username: "admin",
-      password: "admin",
+      username: "",
+      password: "",
       message: "",
     };
   },
   methods: {
     login() {
-      if (this.username == this.password && this.username == "user") {
-        store.state.username = "user";
-        router.push("Documents");
-
-        return;
-      }
-
-      if (this.username == this.password && this.username == "admin") {
-        store.state.username = "admin";
-        router.push("Documents");
-        return;
-      }
-
-      this.message = "Incorrect username or password";
+      axios
+        .post(`${store.state.serverEndpoint}/login`, {
+          username: this.username,
+          password: this.password,
+        })
+        .then((res) => {
+          if (res.data?.access_token) {
+            sessionStorage.setItem("accessToken", res.data.access_token);
+            store.dispatch("auth");
+          }
+          return res.data;
+        })
+        .catch((error) => {
+          this.message = error;
+        });
     },
   },
 };

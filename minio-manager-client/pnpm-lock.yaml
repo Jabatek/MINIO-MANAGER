@@ -21,6 +21,7 @@ specifiers:
   eslint-plugin-prettier: ^3.3.1
   eslint-plugin-vue: ^7.0.0
   geckodriver: ^1.20.0
+  jwt-decode: 3.1.2
   mdb-vue-ui-kit: 1.9.0
   node-sass: ^4.12.0
   prettier: ^2.2.1
@@ -37,6 +38,7 @@ specifiers:
 dependencies:
   axios: 0.24.0
   core-js: 3.20.3
+  jwt-decode: 3.1.2
   mdb-vue-ui-kit: 1.9.0
   register-service-worker: 1.7.2
   vue: 3.2.27
@@ -7390,6 +7392,10 @@ packages:
       json-schema: 0.4.0
       verror: 1.10.0
     dev: true
+
+  /jwt-decode/3.1.2:
+    resolution: {integrity: sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==}
+    dev: false
 
   /killable/1.0.1:
     resolution: {integrity: sha512-LzqtLKlUwirEUyl/nicirVmNiPvYs7l5n8wOPP7fyJVpUPkvCnW/vuiXGpylGUlnPDnB7311rARzAt3Mhswpjg==}
