@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  OnApplicationShutdown,
-  OnModuleDestroy,
-} from '@nestjs/common';
+import { Injectable, OnApplicationShutdown } from '@nestjs/common';
 import * as Minio from 'minio';
 import * as fs from 'fs';
 import * as sharp from 'sharp';
@@ -28,8 +24,8 @@ export class AppService implements OnApplicationShutdown {
 
   minioClient: Minio.Client;
   setting = {
-    endPoint: '17.30.0.10',
-    port: 9000,
+    endPoint: process.env.DEFAULT_ENDPOINT,
+    port: parseInt(process.env.DEFAULT_PORT),
     useSSL: false,
     accessKey: '',
     secretKey: '',

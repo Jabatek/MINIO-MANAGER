@@ -1,1 +1,9 @@
-{"endPoint":"17.30.0.10","port":9000,"useSSL":false,"accessKey":"0835OXGVU3TYRP8II86N","secretKey":"HDDeXRSHlkGI2MyrNd0n+qQ6pluhVFypfFJgef84","bucket":"docs","thumbnailBucket":"thumbnail"}
+{
+  "endPoint": "192.168.2.10",
+  "port": 9000,
+  "useSSL": false,
+  "accessKey": "IFNMUWYVHR336I3B2V1G",
+  "secretKey": "Kq5kUv+ca6Mgzzs0TRIn3ZjR24yWNhO0OOe++cmn",
+  "bucket": "docs",
+  "thumbnailBucket": "thumbnails"
+}

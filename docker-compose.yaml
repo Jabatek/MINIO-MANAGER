@@ -28,7 +28,7 @@ services:
       - data1-2:/data2
     networks:
       backend:
-        ipv4_address: 17.30.0.3
+        ipv4_address: "192.168.2.3"
 
   minio2:
     <<: *minio-common
@@ -38,7 +38,7 @@ services:
       - data2-2:/data2
     networks:
       backend:
-        ipv4_address: 17.30.0.4
+        ipv4_address: "192.168.2.4"
 
   minio3:
     <<: *minio-common
@@ -48,7 +48,7 @@ services:
       - data3-2:/data2
     networks:
       backend:
-        ipv4_address: 17.30.0.5
+        ipv4_address: "192.168.2.5"
 
   minio4:
     <<: *minio-common
@@ -58,7 +58,7 @@ services:
       - data4-2:/data2
     networks:
       backend:
-        ipv4_address: 17.30.0.6
+        ipv4_address: "192.168.2.6"
 
   nginx:
     image: nginx:1.19.2-alpine
@@ -67,7 +67,7 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     networks:
       backend:
-        ipv4_address: 17.30.0.10
+        ipv4_address: "192.168.2.10"
     ports:
       - '9000:9000'
       - '9001:9001'
@@ -84,7 +84,7 @@ services:
     command: npm run start
     networks:
       backend:
-        ipv4_address: 17.30.0.30
+        ipv4_address: 192.168.2.30
     ports:
       - '3000:3000'
     volumes:
@@ -97,7 +97,7 @@ services:
     container_name: minio_manager_client
     hostname: minio_manager_client
     environment:
-      - VUE_APP_SERVER_ENDPOINT=http://17.30.0.30:3000
+      - VUE_APP_SERVER_ENDPOINT=http://192.168.2.30:3000
     command: npm run serve
     ports:
       - '4000:8080'
@@ -109,7 +109,7 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 17.30.0.0/16
+        - subnet: "192.168.2.0/20"
 
 ## By default this config uses default local driver,
 ## For custom volumes replace with volume driver configuration.

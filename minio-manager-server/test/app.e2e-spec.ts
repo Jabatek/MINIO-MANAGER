@@ -5,7 +5,7 @@ import { AppModule } from './../src/app.module';
 import * as fs from 'fs';
 import * as superagent from 'superagent';
 
-const postPresignedObject = async (data) => {
+const postPresignedObject = (data) => {
   return new Promise((resolve, reject) => {
     const req = superagent.post(data.postURL);
     Object.keys(data.formData).forEach((key) =>
